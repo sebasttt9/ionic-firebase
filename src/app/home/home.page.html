@@ -1,0 +1,86 @@
+<ion-header class="no-shadow"></ion-header>
+<ion-content fullscreen class="login-full-bg">
+  <div class="login-flex-container" style="justify-content: center; align-items: center;">
+    <div class="login-image-col" style="flex: none; margin-right: 40px;">
+      <img 
+        src="https://img.icons8.com/ios-filled/100/000000/apple-camera.png" 
+        alt="Logo de cámara" 
+        class="login-illustration" 
+        style="max-width: 100px; max-height: 100px;"
+      />
+    </div>
+    <div class="login-form-col" style="flex: none; width: 350px;">
+      <div class="login-card" style="align-items: center; text-align: center;">
+        <h2 class="login-title" style="width: 100%;">
+          <i class="fa fa-home" style="margin-right:8px;"></i>
+          ¡Bienvenido a la página principal!
+        </h2>
+
+        <!-- INPUT Y BOTONES PARA EL NOMBRE -->
+        <ion-item style="margin-top: 20px;">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="nombreUsuario"></ion-input>
+        </ion-item>
+
+        <ion-button expand="full" (click)="guardarNombre()" style="margin-top: 12px;">
+          <i class="fa fa-save" style="margin-right:8px;"></i>
+          Guardar Nombre
+        </ion-button>
+
+        <ion-button expand="full" color="medium" (click)="leerNombre()" style="margin-top: 8px;">
+          <i class="fa fa-download" style="margin-right:8px;"></i>
+          Leer Nombre
+        </ion-button>
+
+        <ion-button expand="full" color="danger" (click)="borrarNombre()" style="margin-top: 8px;">
+          <i class="fa fa-trash" style="margin-right:8px;"></i>
+          Borrar Nombre
+        </ion-button>
+        <!-- FIN INPUT Y BOTONES -->
+
+        <button
+          expand="full"
+          fill="solid"
+          color="danger"
+          class="login-btn"
+          (click)="logout()"
+          style="margin-top: 20px;"
+        >
+          <i class="fa fa-sign-out" style="margin-right:8px;"></i>
+          Cerrar sesión
+        </button>
+
+        <button
+          expand="full"
+          fill="solid"
+          color="primary"
+          class="login-btn"
+          (click)="tomarFoto()"
+          style="margin-top: 16px;"
+        >
+          <i class="fa fa-camera" style="margin-right:8px;"></i>
+          Tomar Foto
+        </button>
+
+        <div *ngIf="isOnline" class="online-msg" style="margin-top: 20px;">
+          <i class="fa fa-wifi" style="margin-right:8px;"></i>
+          ¡Conectado a Internet!
+        </div>
+        <div *ngIf="!isOnline" class="offline-msg" style="margin-top: 20px;">
+          <i class="fa fa-exclamation-triangle" style="margin-right:8px;"></i>
+          Sin conexión a Internet
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-button
+  expand="full"
+  fill="solid"
+  color="secondary"
+  style="margin-top: 24px;"
+  (click)="cargarPersonajes()"
+>
+  <i class="fa fa-database" style="margin-right:8px;"></i>
+  Cargar Personajes
+</ion-button>
+</ion-content>

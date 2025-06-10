@@ -1,0 +1,84 @@
+<ion-header class="no-shadow"></ion-header>
+<ion-content fullscreen class="login-full-bg">
+  <div class="login-flex-container center-only">
+    <div class="login-form-col" style="max-width: 400px; width: 90%; margin: auto;">
+      <div class="login-card" style="padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px;">
+        <h2 class="login-title" style="text-align: center; margin-bottom: 1.5rem;">
+          CREA TU CUENTA <span class="brand-title"></span>
+        </h2>
+        
+        <form [formGroup]="registerForm" (ngSubmit)="registerEmail()">
+          <div class="input-item" style="margin-bottom: 1rem;">
+            <span class="input-icon">
+              <i class="fa fa-envelope"></i>
+            </span>
+            <input
+              placeholder="Email"
+              formControlName="email"
+              type="email"
+              required
+              class="input-field"
+              style="width: 100%; padding-left: 2.5rem; height: 2.8rem; border-radius: 4px; border: 1px solid #ccc;"
+            />
+          </div>
+          <ion-text color="danger" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" style="display: block; margin-bottom: 1rem;">
+            Email inválido.
+          </ion-text>
+          <div class="input-item" style="margin-bottom: 1rem; position: relative;">
+            <span class="input-icon">
+              <i class="fa fa-key"></i>
+            </span>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="Contraseña"
+              formControlName="password"
+              required
+              class="input-field"
+              style="width: 100%; padding-left: 2.5rem; height: 2.8rem; border-radius: 4px; border: 1px solid #ccc;"
+            />
+            <span
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+              style="cursor:pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"
+              [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+            >
+              <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+            </span>
+          </div>
+          <ion-text color="danger" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" style="display: block; margin-bottom: 1.5rem;">
+            Mínimo 6 caracteres.
+          </ion-text>
+          <button type="submit" class="login-btn" style="width: 100%; padding: 0.75rem; background-color: #3880ff; color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+            Registrarse
+          </button>
+        </form>
+
+        <div class="divider" style="display: flex; align-items: center; margin: 1.5rem 0; gap: 0.5rem;">
+          <hr style="flex: 1; border: none; height: 1px; background: #ddd;" />
+          <span style="color: #999; font-weight: 600;">O</span>
+          <hr style="flex: 1; border: none; height: 1px; background: #ddd;" />
+        </div>
+
+        <!-- Botones sociales -->
+        <button expand="full" fill="solid" class="social-btn google" (click)="registerGoogle()" style="width: 100%; margin-bottom: 0.75rem; background-color: #db4437; color: white; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 4px; border: none; padding: 0.5rem;">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="social-icon" alt="Google" style="height: 20px;" />
+          REGISTRARSE CON GOOGLE
+        </button>
+        <button expand="full" fill="solid" class="social-btn facebook" (click)="registerFacebook()" style="width: 100%; background-color: #3b5998; color: white; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 4px; border: none; padding: 0.5rem;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" class="social-icon" alt="Facebook" style="height: 20px;" />
+          REGISTRARSE CON FACEBOOK
+        </button>
+
+        <div *ngIf="success" class="success-msg" style="color: green; margin-top: 1rem; text-align: center;">{{ success }}</div>
+        <div *ngIf="error" class="error-msg" style="color: red; margin-top: 1rem; text-align: center;">{{ error }}</div>
+
+        <div class="register-row" style="margin-top: 1.5rem; text-align: center;">
+          <span>¿Ya tienes cuenta?</span>
+          <a (click)="goToLogin()" class="register-link" style="color: #3880ff; cursor: pointer; font-weight: 600; margin-left: 0.5rem; text-decoration: none; transition: color 0.3s;">
+            Inicia sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
