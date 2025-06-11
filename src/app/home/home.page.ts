@@ -10,13 +10,13 @@ import { NavController } from '@ionic/angular';
 import { ChangeDetectorRef } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';  // <-- Importa HttpClient
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, HttpClientModule],
 })
 export class HomePage {
   foto: string | undefined;
@@ -25,12 +25,14 @@ export class HomePage {
 
   nombreUsuario: string = '';
 
+  personajes: any[] = []; // <-- Aquí guardamos los personajes
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private nav: NavController,
     private cdr: ChangeDetectorRef,
-    private http: HttpClient  // <-- Inyecta HttpClient aquí
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -71,12 +73,12 @@ export class HomePage {
   async mostrarToast(mensaje: string) {
     await Toast.show({
       text: mensaje,
-      duration: 'short'
+      duration: 'short',
     });
   }
 
   login() {
-    this.nav.navigateRoot('/home'); 
+    this.nav.navigateRoot('/home');
   }
 
   async guardarNombre() {
@@ -99,17 +101,17 @@ export class HomePage {
     this.mostrarToast('Nombre borrado');
   }
 
-  // NUEVO: función para cargar personajes de la API
   cargarPersonajes() {
     this.http.get('https://rickandmortyapi.com/api/character').subscribe({
       next: (data: any) => {
-        console.log('Personajes cargados:', data.results);
-        this.mostrarToast(`Cargados ${data.results.length} personajes. Revisa la consola.`);
+        this.personajes = data.results;
+        this.mostrarToast(`Cargados ${this.personajes.length} personajes.`);
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error al cargar personajes:', err);
         this.mostrarToast('Error al cargar personajes');
-      }
+      },
     });
   }
 }

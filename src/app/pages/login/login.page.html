@@ -2,88 +2,49 @@
 <body>
   <ion-content fullscreen class="login-full-bg">
     <div class="login-flex-container center-only">
-      <div class="login-form-col">
-        <div class="login-card">
-          <h2 class="login-title">
-            REGISTRO <span class="brand-title"></span>
-          </h2>
+      <h2 class="login-title">INICIA SESIÓN <span class="brand-title"></span></h2>
 
-          <form [formGroup]="loginForm" (ngSubmit)="loginEmail()">
-            <div class="input-item">
-              <span class="input-icon">
-                <i class="fa fa-envelope"></i>
-              </span>
-              <input
-                placeholder="Correo electrónico"
-                formControlName="email"
-                type="email"
-                required
-                class="input-field"
-              />
-            </div>
-            <div class="input-item">
-              <span class="input-icon">
-                <i class="fa fa-key"></i>
-              </span>
-              <input
-                [type]="showPassword ? 'text' : 'password'"
-                placeholder="Contraseña"
-                formControlName="password"
-                required
-                class="input-field"
-              />
-              <span
-                class="toggle-password"
-                (click)="togglePasswordVisibility()"
-                style="cursor:pointer; margin-left:8px;"
-                [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
-              >
-                <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-              </span>
-            </div>
-            <button type="submit" class="login-btn">Iniciar sesión</button>
-          </form>
-
-          <div class="divider">
-            <hr />
-            <span>O</span>
-            <hr />
-          </div>
-
-          <button
-            class="social-btn google"
-            (click)="loginGoogle()"
-            type="button"
-          >
-            <img
-              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-              class="social-icon"
-              alt="Google"
-            />
-            INICIAR CON GOOGLE
-          </button>
-
-          <button
-            class="social-btn facebook"
-            (click)="loginFacebook()"
-            type="button"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
-              class="social-icon"
-              alt="Facebook"
-            />
-            INICIAR CON FACEBOOK
-          </button>
-
-          <div *ngIf="error" class="error-msg">{{ error }}</div>
-
-    <div class="register-row">
-            <span>¿No tienes una cuenta?</span>
-            <a (click)="goToRegister()" class="register-link">Regístrate</a>
-          </div>
-          </div>
+      <form [formGroup]="loginForm" (ngSubmit)="loginEmail()">
+        <label for="email">Correo electrónico</label>
+        <div class="input-item">
+          <span class="input-icon"><i class="fa fa-envelope"></i></span>
+          <input id="email" placeholder="Correo electrónico" formControlName="email" type="email" required class="input-field" />
         </div>
+
+        <label for="password">Contraseña</label>
+        <div class="input-item">
+          <span class="input-icon"><i class="fa fa-key"></i></span>
+          <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" formControlName="password" required class="input-field" />
+          <span class="toggle-password" (click)="togglePasswordVisibility()" style="cursor:pointer; margin-left:8px;" [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+            <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+          </span>
+        </div>
+        
+        <button type="submit" class="login-btn">Iniciar sesión</button>
+      </form>
+
+      <div class="divider">
+        <hr />
+        <span>O</span>
+        <hr />
       </div>
+
+      <button class="social-btn google" (click)="loginGoogle()" type="button">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="social-icon" alt="Google" />
+        INICIAR CON GOOGLE
+      </button>
+
+      <button class="social-btn facebook" (click)="loginFacebook()" type="button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" class="social-icon" alt="Facebook" />
+        INICIAR CON FACEBOOK
+      </button>
+
+      <div *ngIf="error" class="error-msg">{{ error }}</div>
+
+      <div class="register-row">
+        <span>¿No tienes una cuenta?</span>
+        <a (click)="goToRegister()" class="register-link">Regístrate</a>
+      </div>
+    </div>
   </ion-content>
 </body>

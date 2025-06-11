@@ -1,86 +1,76 @@
 <ion-header class="no-shadow"></ion-header>
+
 <ion-content fullscreen class="login-full-bg">
-  <div class="login-flex-container" style="justify-content: center; align-items: center;">
-    <div class="login-image-col" style="flex: none; margin-right: 40px;">
+  <div class="login-card-wrapper">
+    <div class="login-image-col">
       <img 
         src="https://img.icons8.com/ios-filled/100/000000/apple-camera.png" 
         alt="Logo de cámara" 
-        class="login-illustration" 
-        style="max-width: 100px; max-height: 100px;"
+        class="login-illustration"
       />
     </div>
-    <div class="login-form-col" style="flex: none; width: 350px;">
-      <div class="login-card" style="align-items: center; text-align: center;">
-        <h2 class="login-title" style="width: 100%;">
-          <i class="fa fa-home" style="margin-right:8px;"></i>
+
+    <div class="login-form-col">
+      <div class="login-card">
+        <h2 class="login-title">
+          <i class="fa fa-home icon-margin"></i>
           ¡Bienvenido a la página principal!
         </h2>
 
         <!-- INPUT Y BOTONES PARA EL NOMBRE -->
-        <ion-item style="margin-top: 20px;">
+        <ion-item>
           <ion-label position="floating">Nombre</ion-label>
           <ion-input [(ngModel)]="nombreUsuario"></ion-input>
         </ion-item>
 
-        <ion-button expand="full" (click)="guardarNombre()" style="margin-top: 12px;">
-          <i class="fa fa-save" style="margin-right:8px;"></i>
-          Guardar Nombre
+        <ion-button expand="full" (click)="guardarNombre()" class="btn-spacing">
+          <i class="fa fa-save icon-margin"></i>Guardar Nombre
         </ion-button>
 
-        <ion-button expand="full" color="medium" (click)="leerNombre()" style="margin-top: 8px;">
-          <i class="fa fa-download" style="margin-right:8px;"></i>
-          Leer Nombre
+        <ion-button expand="full" color="medium" (click)="leerNombre()" class="btn-spacing">
+          <i class="fa fa-download icon-margin"></i>Leer Nombre
         </ion-button>
 
-        <ion-button expand="full" color="danger" (click)="borrarNombre()" style="margin-top: 8px;">
-          <i class="fa fa-trash" style="margin-right:8px;"></i>
-          Borrar Nombre
+        <ion-button expand="full" color="danger" (click)="borrarNombre()" class="btn-spacing">
+          <i class="fa fa-trash icon-margin"></i>Borrar Nombre
         </ion-button>
         <!-- FIN INPUT Y BOTONES -->
 
-        <button
-          expand="full"
-          fill="solid"
-          color="danger"
-          class="login-btn"
-          (click)="logout()"
-          style="margin-top: 20px;"
-        >
-          <i class="fa fa-sign-out" style="margin-right:8px;"></i>
-          Cerrar sesión
-        </button>
+        <ion-button expand="full" color="danger" class="btn-spacing" (click)="logout()">
+          <i class="fa fa-sign-out icon-margin"></i>Cerrar sesión
+        </ion-button>
 
-        <button
-          expand="full"
-          fill="solid"
-          color="primary"
-          class="login-btn"
-          (click)="tomarFoto()"
-          style="margin-top: 16px;"
-        >
-          <i class="fa fa-camera" style="margin-right:8px;"></i>
-          Tomar Foto
-        </button>
+        <ion-button expand="full" color="primary" class="btn-spacing" (click)="tomarFoto()">
+          <i class="fa fa-camera icon-margin"></i>Tomar Foto
+        </ion-button>
 
-        <div *ngIf="isOnline" class="online-msg" style="margin-top: 20px;">
-          <i class="fa fa-wifi" style="margin-right:8px;"></i>
-          ¡Conectado a Internet!
+        <div *ngIf="isOnline" class="status-msg online-msg">
+          <i class="fa fa-wifi icon-margin"></i>¡Conectado a Internet!
         </div>
-        <div *ngIf="!isOnline" class="offline-msg" style="margin-top: 20px;">
-          <i class="fa fa-exclamation-triangle" style="margin-right:8px;"></i>
-          Sin conexión a Internet
+        <div *ngIf="!isOnline" class="status-msg offline-msg">
+          <i class="fa fa-exclamation-triangle icon-margin"></i>Sin conexión a Internet
+        </div>
+
+        <!-- LISTA DE PERSONAJES -->
+        <div *ngIf="personajes.length > 0" class="personajes-list">
+          <h3>Personajes cargados:</h3>
+          <ion-list>
+            <ion-item *ngFor="let personaje of personajes">
+              <ion-thumbnail slot="start">
+                <img [src]="personaje.image" />
+              </ion-thumbnail>
+              <ion-label>
+                <h2>{{ personaje.name }}</h2>
+                <p>{{ personaje.species }} - {{ personaje.status }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
         </div>
       </div>
     </div>
   </div>
-  <ion-button
-  expand="full"
-  fill="solid"
-  color="secondary"
-  style="margin-top: 24px;"
-  (click)="cargarPersonajes()"
->
-  <i class="fa fa-database" style="margin-right:8px;"></i>
-  Cargar Personajes
-</ion-button>
+
+  <ion-button expand="full" color="secondary" class="bottom-btn" (click)="cargarPersonajes()">
+    <i class="fa fa-database icon-margin"></i>Cargar Personajes
+  </ion-button>
 </ion-content>
